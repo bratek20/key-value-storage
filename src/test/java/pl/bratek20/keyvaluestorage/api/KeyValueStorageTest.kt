@@ -3,7 +3,6 @@ package pl.bratek20.keyvaluestorage.api
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import pl.bratek20.keyvaluestorage.fixtures.Assert
-import pl.bratek20.keyvaluestorage.fixtures.Assert.ExpectedKeyValuePair
 import pl.bratek20.keyvaluestorage.fixtures.Setup
 
 abstract class KeyValueStorageTest {
@@ -27,7 +26,7 @@ abstract class KeyValueStorageTest {
 
         val result = storage.get(Key("key"))
 
-        Assert.assertValue(result, "value")
+        Assert.value(result, "value")
     }
 
     @Test
@@ -39,12 +38,9 @@ abstract class KeyValueStorageTest {
 
         val result = storage.getAll()
 
-        Assert.assertKeyValuePairList(
-            result,
-            listOf(
-                ExpectedKeyValuePair("key1", "value1"),
-                ExpectedKeyValuePair("key2", "value2")
-            )
-        )
+        Assert.keyValuePairList(result, listOf(
+            { key = "key1"; value = "value1" },
+            { key = "key2"; value = "value2" }
+        ))
     }
 }

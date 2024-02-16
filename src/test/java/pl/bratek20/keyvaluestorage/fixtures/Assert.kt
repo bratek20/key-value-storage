@@ -5,21 +5,22 @@ import pl.bratek20.keyvaluestorage.api.KeyValuePair
 import pl.bratek20.keyvaluestorage.api.Value
 
 object Assert {
-    fun assertValue(given: Value, expected: String?) {
+    fun value(given: Value, expected: String) {
         Assertions.assertEquals(given.value, expected)
     }
 
-    private fun assertKeyValuePair(given: KeyValuePair, expected: ExpectedKeyValuePair) {
+    private fun keyValuePair(given: KeyValuePair, expectedConfigure: ExpectedKeyValuePair.() -> Unit) {
+        val expected = ExpectedKeyValuePair().apply(expectedConfigure)
         Assertions.assertEquals(given.key.value, expected.key)
-        assertValue(given.value, expected.value)
+        value(given.value, expected.value)
     }
 
-    fun assertKeyValuePairList(given: List<KeyValuePair>, expected: List<ExpectedKeyValuePair>) {
-        Assertions.assertEquals(given.size, expected.size)
-        for (i in given.indices) {
-            assertKeyValuePair(given[i], expected[i])
+    fun keyValuePairList(given: List<KeyValuePair>, expectedConfigure: List<ExpectedKeyValuePair.() -> Unit>) {
+        Assertions.assertEquals(given.size, expectedConfigure.size)
+        given.forEachIndexed { index, keyValuePair ->
+            keyValuePair(keyValuePair, expectedConfigure[index])
         }
     }
 
-    data class ExpectedKeyValuePair(val key: String, val value: String)
+    class ExpectedKeyValuePair(var key: String = "", var value: String = "")
 }
