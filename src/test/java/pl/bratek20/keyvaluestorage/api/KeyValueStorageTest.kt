@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import pl.bratek20.keyvaluestorage.fixtures.Assert
 import pl.bratek20.keyvaluestorage.fixtures.Assert.ExpectedKeyValuePair
 import pl.bratek20.keyvaluestorage.fixtures.Setup
-import pl.bratek20.keyvaluestorage.fixtures.Setup.SetArgs
 
 abstract class KeyValueStorageTest {
     protected abstract fun createStorage(): KeyValueStorage
@@ -21,7 +20,10 @@ abstract class KeyValueStorageTest {
 
     @Test
     fun shouldSetAndGetValue() {
-        setup.set(SetArgs("key", "value"))
+        setup.set {
+            key = "key"
+            value = "value"
+        }
 
         val result = storage.get(Key("key"))
 
@@ -30,12 +32,10 @@ abstract class KeyValueStorageTest {
 
     @Test
     fun shouldGetAll() {
-        setup.setMany(
-            listOf(
-                SetArgs("key1", "value1"),
-                SetArgs("key2", "value2")
-            )
-        )
+        setup.setMany(listOf(
+            { key = "key1"; value = "value1" },
+            { key = "key2"; value = "value2" }
+        ))
 
         val result = storage.getAll()
 

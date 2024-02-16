@@ -6,13 +6,17 @@ import pl.bratek20.keyvaluestorage.api.Value
 
 class Setup(private val storage: KeyValueStorage) {
 
-    data class SetArgs(val key: String, val value: String)
+    data class SetArgs(var key: String = "", var value: String = "")
 
-    fun set(args: SetArgs) {
-        storage.set(Key(args.key),Value(args.value))
+    fun set(def: SetArgs.() -> Unit) {
+        val args = SetArgs().apply(def)
+        storage.set(Key(args.key), Value(args.value))
     }
 
-    fun setMany(args: List<SetArgs>) {
-        args.forEach(this::set)
+    fun setMany(configures: List<SetArgs.() -> Unit>) {
+        configures.forEach { configure ->
+            val args = SetArgs().apply(configure)
+            storage.set(Key(args.key), Value(args.value))
+        }
     }
 }
