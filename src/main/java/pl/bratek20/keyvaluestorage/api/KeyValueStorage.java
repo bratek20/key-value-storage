@@ -6,4 +6,5 @@ public interface KeyValueStorage {
     void set(Key key, Value value);
     Value get(Key key);
     List<KeyValuePair> getAll();
+    List<Key> getAllKeys();
 }

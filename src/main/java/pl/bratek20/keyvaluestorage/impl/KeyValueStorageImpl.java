@@ -29,4 +29,11 @@ public class KeyValueStorageImpl implements KeyValueStorage {
     public List<KeyValuePair> getAll() {
         return new ArrayList<>(storage);
     }
+
+    @Override
+    public List<Key> getAllKeys() {
+        return storage.stream()
+                .map(KeyValuePair::key)
+                .toList();
+    }
 }

@@ -43,4 +43,19 @@ abstract class KeyValueStorageTest {
             { key = "key2"; value = "value2" }
         ))
     }
+
+    @Test
+    fun shouldGetAllKeys() {
+        setup.setMany(listOf(
+            { key = "key1" },
+            { key = "key2" }
+        ))
+
+        val result = storage.getAllKeys()
+
+        Assert.keyList(result, listOf(
+            "key1",
+            "key2"
+        ))
+    }
 }
