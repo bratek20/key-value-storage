@@ -1,4 +1,4 @@
 package pl.bratek20.keyvaluestorage.api;
 
-public class Value {
+public record Value(String value) {
 }
