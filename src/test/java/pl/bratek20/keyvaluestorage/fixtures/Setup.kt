@@ -13,10 +13,9 @@ class Setup(private val storage: KeyValueStorage) {
         storage.set(Key(args.key), Value(args.value))
     }
 
-    fun setMany(configures: List<SetArgs.() -> Unit>) {
-        configures.forEach { configure ->
-            val args = SetArgs().apply(configure)
-            storage.set(Key(args.key), Value(args.value))
+    fun setMany(defs: List<SetArgs.() -> Unit>) {
+        defs.forEach { def ->
+            set { def() }
         }
     }
 }
