@@ -6,6 +6,7 @@ import pl.bratek20.keyvaluestorage.api.KeyValueStorage;
 import pl.bratek20.keyvaluestorage.api.Value;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class KeyValueStorageImpl implements KeyValueStorage {
@@ -27,7 +28,9 @@ public class KeyValueStorageImpl implements KeyValueStorage {
 
     @Override
     public List<KeyValuePair> getAll() {
-        return new ArrayList<>(storage);
+        return storage.stream()
+                .sorted(Comparator.comparing(kv -> kv.value().value()))
+                .toList();
     }
 
     @Override

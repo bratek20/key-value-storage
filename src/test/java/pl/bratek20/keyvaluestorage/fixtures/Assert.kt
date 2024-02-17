@@ -12,8 +12,12 @@ object Assert {
 
     private fun keyValuePair(given: KeyValuePair, expectedConfigure: ExpectedKeyValuePair.() -> Unit) {
         val expected = ExpectedKeyValuePair().apply(expectedConfigure)
-        Assertions.assertEquals(given.key.value, expected.key)
-        value(given.value, expected.value)
+        if (expected.key != null) {
+            Assertions.assertEquals(given.key.value, expected.key)
+        }
+        if (expected.value != null) {
+            Assertions.assertEquals(given.value.value, expected.value)
+        }
     }
 
     fun keyValuePairList(given: List<KeyValuePair>, expectedConfigure: List<ExpectedKeyValuePair.() -> Unit>) {
@@ -30,5 +34,5 @@ object Assert {
         }
     }
 
-    class ExpectedKeyValuePair(var key: String = "", var value: String = "")
+    class ExpectedKeyValuePair(var key: String? = null, var value: String? = null)
 }

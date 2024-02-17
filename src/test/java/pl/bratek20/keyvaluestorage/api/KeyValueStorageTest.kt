@@ -58,4 +58,19 @@ abstract class KeyValueStorageTest {
             "key2"
         ))
     }
+
+    @Test
+    fun keyValuePairsShouldBeSortedByValuesForGetAll() {
+        setup.setMany(listOf(
+            { key = "key1"; value = "2" },
+            { key = "key2"; value = "1" }
+        ))
+
+        val result = storage.getAll()
+
+        Assert.keyValuePairList(result, listOf(
+            { key = "key2" },
+            { key = "key1" }
+        ))
+    }
 }
