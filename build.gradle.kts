@@ -2,6 +2,8 @@ plugins {
     id("java")
 
     kotlin("jvm") version "1.9.22"
+
+    id("groovy")
 }
 
 group = "pl.bratek20"
