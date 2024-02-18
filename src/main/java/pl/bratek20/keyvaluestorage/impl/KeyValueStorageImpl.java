@@ -1,9 +1,6 @@
 package pl.bratek20.keyvaluestorage.impl;
 
-import pl.bratek20.keyvaluestorage.api.Key;
-import pl.bratek20.keyvaluestorage.api.KeyValuePair;
-import pl.bratek20.keyvaluestorage.api.KeyValueStorage;
-import pl.bratek20.keyvaluestorage.api.Value;
+import pl.bratek20.keyvaluestorage.api.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,7 +20,7 @@ public class KeyValueStorageImpl implements KeyValueStorage {
                 .filter(kv -> kv.key().equals(key))
                 .map(KeyValuePair::value)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(KeyNotFoundException::new);
     }
 
     @Override

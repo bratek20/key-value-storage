@@ -2,6 +2,7 @@ package pl.bratek20.keyvaluestorage.api
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import pl.bratek20.keyvaluestorage.fixtures.Assert
 import pl.bratek20.keyvaluestorage.fixtures.Setup
 
@@ -72,5 +73,10 @@ abstract class KeyValueStorageTest {
             { key = "key2" },
             { key = "key1" }
         ))
+    }
+
+    @Test
+    fun shouldThrowIfKeyNotFound() {
+        assertThrows<KeyNotFoundException> {  storage.get(Key("key"))}
     }
 }
