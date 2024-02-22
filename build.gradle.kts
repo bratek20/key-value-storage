@@ -2,6 +2,8 @@ plugins {
     id("java")
 
     kotlin("jvm") version "1.9.22"
+
+    id("com.google.protobuf") version "0.9.4"
 }
 
 group = "pl.bratek20"
@@ -14,6 +16,14 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    implementation("com.google.protobuf:protobuf-java:3.25.2")
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.2"
+    }
 }
 
 tasks.test {
