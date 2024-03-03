@@ -1,5 +1,5 @@
 plugins {
-    id("java")
+    id("pl.bratek20.base-conventions") version "1.0.6"
 
     kotlin("jvm") version "1.9.22"
 
