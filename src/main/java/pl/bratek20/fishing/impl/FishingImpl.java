@@ -7,6 +7,6 @@ import pl.bratek20.fishing.api.FishingApi;
 public class FishingImpl implements FishingApi {
     @Override
     public FishId catchFish(FisheryId fisheryId) {
-        return new FishId("fish");
+        return new FishId("myFish");
     }
 }

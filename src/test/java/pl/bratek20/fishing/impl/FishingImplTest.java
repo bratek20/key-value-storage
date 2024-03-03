@@ -1,7 +1,15 @@
 package pl.bratek20.fishing.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
+import pl.bratek20.fishing.api.Fishery;
+import pl.bratek20.fishing.api.FishingApi;
+import pl.bratek20.fishing.api.FishingApiTest;
 
-class FishingImplTest {
+import java.util.List;
 
+class FishingImplTest extends FishingApiTest {
+
+    @Override
+    protected FishingApi createInstance(List<? extends Fishery> params) {
+        return new FishingImpl();
+    }
 }

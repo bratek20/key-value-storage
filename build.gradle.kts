@@ -11,6 +11,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -18,6 +19,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     implementation("com.google.protobuf:protobuf-java:3.25.2")
+
+    testImplementation("pl.bratek20:bratek20-tests:1.0.0")
 }
 
 protobuf {
