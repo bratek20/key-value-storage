@@ -13,6 +13,12 @@ abstract class FishingApiTest : InterfaceParamsTest<FishingApi, List<Fishery>>()
                 fishIds = listOf(
                     "myFish"
                 )
+            },
+            fishery {
+                id = "2"
+                fishIds = listOf(
+                    "myFish2"
+                )
             }
         )
     }
@@ -23,10 +29,18 @@ abstract class FishingApiTest : InterfaceParamsTest<FishingApi, List<Fishery>>()
         super.setup()
         api = instance;
     }
+
     @Test
     fun shouldCatchFish() {
         val fishId = api.catchFish(FisheryId("1"))
 
         assertEquals(fishId.value, "myFish")
+    }
+
+    @Test
+    fun shouldCatchFishFromOtherFishery() {
+        val fishId = api.catchFish(FisheryId("2"))
+
+        assertEquals(fishId.value, "myFish2")
     }
 }

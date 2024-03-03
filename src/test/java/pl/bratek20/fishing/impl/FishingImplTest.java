@@ -10,6 +10,6 @@ class FishingImplTest extends FishingApiTest {
 
     @Override
     protected FishingApi createInstance(List<? extends Fishery> params) {
-        return new FishingImpl();
+        return new FishingImpl((List<Fishery>) params);
     }
 }
