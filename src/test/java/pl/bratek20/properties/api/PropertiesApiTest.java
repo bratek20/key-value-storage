@@ -1,6 +1,7 @@
 package pl.bratek20.properties.api;
 
 import org.junit.jupiter.api.Test;
+import pl.bratek20.properties.sources.inmemory.InMemoryPropertiesSource;
 import pl.bratek20.tests.InterfaceParamsTest;
 
 import java.util.List;
@@ -8,12 +9,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class PropertiesApiTest extends InterfaceParamsTest<PropertiesApi, List<PropertiesSource>> {
-    private final PropertiesSourceMock sourceMock = new PropertiesSourceMock();
+    private final InMemoryPropertiesSource source = new InMemoryPropertiesSource("mock");
 
     @Override
     protected List<PropertiesSource> defaultParams() {
         return List.of(
-            sourceMock
+            source
         );
     }
 
@@ -30,7 +31,7 @@ public abstract class PropertiesApiTest extends InterfaceParamsTest<PropertiesAp
     @Test
     void shouldGetProperty() {
         var prop = new MyProperty("x");
-        sourceMock.set("mine", prop);
+        source.set(new PropertyName("mine"), prop);
 
         var x = api.get(new PropertiesSourceName("mock"), new PropertyName("mine"), MyProperty.class);
 
