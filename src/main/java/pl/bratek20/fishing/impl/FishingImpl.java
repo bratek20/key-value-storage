@@ -1,22 +1,26 @@
 package pl.bratek20.fishing.impl;
 
+import lombok.RequiredArgsConstructor;
 import pl.bratek20.fishing.api.FishId;
 import pl.bratek20.fishing.api.Fishery;
 import pl.bratek20.fishing.api.FisheryId;
 import pl.bratek20.fishing.api.FishingApi;
+import pl.bratek20.properties.api.PropertiesApi;
+import pl.bratek20.properties.api.PropertyName;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class FishingImpl implements FishingApi {
-    private final List<Fishery> fisheries;
+    private final PropertiesApi propertiesApi;
 
-    public FishingImpl(List<Fishery> fisheries) {
-        this.fisheries = fisheries;
+    private List<Fishery> getFisheries() {
+        return propertiesApi.getList(new PropertyName("fisheries"), Fishery.class);
     }
 
     @Override
     public FishId catchFish(FisheryId fisheryId) {
-        var fishery = fisheries.stream()
+        var fishery = getFisheries().stream()
             .filter(f -> f.fisheryId().equals(fisheryId))
             .findFirst().orElseThrow();
 

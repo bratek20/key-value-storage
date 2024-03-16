@@ -15,7 +15,12 @@ public class PropertiesImpl implements PropertiesApi {
     }
 
     @Override
-    public <T> T get(PropertiesSourceName sourceName, PropertyName propertyName, Class<T> propertyType) {
+    public <T> T get(PropertyName propertyName, Class<T> propertyType) {
         return sources.get(0).get(propertyName, propertyType);
+    }
+
+    @Override
+    public <T> List<T> getList(PropertyName propertyName, Class<T> propertyType) {
+        return sources.get(0).getList(propertyName, propertyType);
     }
 }

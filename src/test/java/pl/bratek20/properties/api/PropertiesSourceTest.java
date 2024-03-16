@@ -1,8 +1,5 @@
 package pl.bratek20.properties.api;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,13 +9,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class PropertiesSourceTest {
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    protected static class SomeProperty {
-        private String value;
-        private String otherValue;
-    }
+
+    protected record SomeProperty(String value, String otherValue) { }
     protected record OtherProperty(String value) { }
 
     protected static PropertyName SOME_PROPERTY_NAME = new PropertyName("someProperty");

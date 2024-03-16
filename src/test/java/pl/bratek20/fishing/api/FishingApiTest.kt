@@ -3,31 +3,40 @@ package pl.bratek20.fishing.api
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import pl.bratek20.fishing.fixtures.fishery
+import pl.bratek20.properties.api.PropertyName
+import pl.bratek20.properties.fixtures.PropertiesApiMock
+import pl.bratek20.tests.ContextTest
 import pl.bratek20.tests.InterfaceParamsTest
 
-abstract class FishingApiTest : InterfaceParamsTest<FishingApi, List<Fishery>>() {
-    override fun defaultParams(): List<Fishery> {
-        return listOf(
-            fishery {
-                id = "1"
-                fishIds = listOf(
-                    "myFish"
-                )
-            },
-            fishery {
-                id = "2"
-                fishIds = listOf(
-                    "myFish2"
-                )
-            }
-        )
-    }
+abstract class FishingApiTest : ContextTest<FishingApiTest.Context>() {
+    data class Context(
+        val propertiesApiMock: PropertiesApiMock,
+        val api: FishingApi
+    )
 
+    private lateinit var propertiesApiMock: PropertiesApiMock
     private lateinit var api: FishingApi
 
-    override fun setup() {
-        super.setup()
-        api = instance;
+    override fun applyContext(context: Context) {
+        propertiesApiMock = context.propertiesApiMock
+        api = context.api
+
+        propertiesApiMock.setProperty(PropertyName("fisheries"),
+            listOf(
+                fishery {
+                    id = "1"
+                    fishIds = listOf(
+                        "myFish"
+                    )
+                },
+                fishery {
+                    id = "2"
+                    fishIds = listOf(
+                        "myFish2"
+                    )
+                }
+            )
+        )
     }
 
     @Test
