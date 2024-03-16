@@ -9,7 +9,8 @@ class InMemoryPropertiesSourceTest extends PropertiesSourceTest {
     @Override
     protected PropertiesSource createAndSetupSource() {
         var source = new InMemoryPropertiesSource("inmemory");
-        source.set(EXPECTED_PROPERTY_NAME, EXPECTED_PROPERTY);
+        source.set(SOME_PROPERTY_NAME, EXPECTED_SOME_PROPERTY);
+        source.set(SOME_PROPERTY_LIST_NAME, EXPECTED_SOME_PROPERTY_LIST);
         return source;
     }
 

@@ -21,6 +21,9 @@ dependencies {
     implementation("com.google.protobuf:protobuf-java:3.25.2")
 
     testImplementation("pl.bratek20:bratek20-tests:1.0.0")
+
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0")
+
 }
 
 protobuf {

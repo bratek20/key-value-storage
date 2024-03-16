@@ -6,6 +6,7 @@ import pl.bratek20.properties.api.PropertiesSourceName;
 import pl.bratek20.properties.api.PropertyName;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -21,6 +22,12 @@ public class InMemoryPropertiesSource implements PropertiesSource {
     @Override
     public <T> T get(PropertyName name, Class<T> type) {
         return type.cast(properties.get(name));
+    }
+
+    @Override
+    public <T> List<T> getList(PropertyName name, Class<T> type) {
+        var property = properties.get(name);
+        return (List<T>) property;
     }
 
     @Override
