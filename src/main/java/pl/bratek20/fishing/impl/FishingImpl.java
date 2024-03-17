@@ -6,7 +6,6 @@ import pl.bratek20.fishing.api.Fishery;
 import pl.bratek20.fishing.api.FisheryId;
 import pl.bratek20.fishing.api.FishingApi;
 import pl.bratek20.properties.api.PropertiesApi;
-import pl.bratek20.properties.api.PropertyName;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class FishingImpl implements FishingApi {
     private final PropertiesApi propertiesApi;
 
     private List<Fishery> getFisheries() {
-        return propertiesApi.getList(new PropertyName("fisheries"), Fishery.class);
+        return propertiesApi.getList("fisheries", Fishery.class);
     }
 
     @Override

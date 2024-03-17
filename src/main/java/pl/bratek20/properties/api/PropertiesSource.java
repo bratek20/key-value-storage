@@ -3,11 +3,11 @@ package pl.bratek20.properties.api;
 import java.util.List;
 
 public interface PropertiesSource {
-    PropertiesSourceName getName();
+    PropertiesSourceId getId();
 
-    <T> T get(PropertyName name, Class<T> type);
+    <T> T get(String name, Class<T> type);
 
-    <T> List<T> getList(PropertyName name, Class<T> type);
+    <T> List<T> getList(String name, Class<T> type);
 
-    <T> boolean hasOfType(PropertyName name, Class<T> type);
+    <T> boolean hasOfType(String name, Class<T> type);
 }

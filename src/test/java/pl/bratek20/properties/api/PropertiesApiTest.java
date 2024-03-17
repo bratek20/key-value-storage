@@ -31,9 +31,9 @@ public abstract class PropertiesApiTest extends InterfaceParamsTest<PropertiesAp
     @Test
     void shouldGetProperty() {
         var prop = new MyProperty("x");
-        source.set(new PropertyName("mine"), prop);
+        source.set("mine", prop);
 
-        var x = api.get(new PropertyName("mine"), MyProperty.class);
+        var x = api.get("mine", MyProperty.class);
 
         assertEquals(prop, x);
     }

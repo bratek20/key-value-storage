@@ -3,10 +3,8 @@ package pl.bratek20.fishing.api
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import pl.bratek20.fishing.fixtures.fishery
-import pl.bratek20.properties.api.PropertyName
 import pl.bratek20.properties.fixtures.PropertiesApiMock
 import pl.bratek20.tests.ContextTest
-import pl.bratek20.tests.InterfaceParamsTest
 
 abstract class FishingApiTest : ContextTest<FishingApiTest.Context>() {
     data class Context(
@@ -21,7 +19,7 @@ abstract class FishingApiTest : ContextTest<FishingApiTest.Context>() {
         propertiesApiMock = context.propertiesApiMock
         api = context.api
 
-        propertiesApiMock.setProperty(PropertyName("fisheries"),
+        propertiesApiMock.setProperty("fisheries",
             listOf(
                 fishery {
                     id = "1"

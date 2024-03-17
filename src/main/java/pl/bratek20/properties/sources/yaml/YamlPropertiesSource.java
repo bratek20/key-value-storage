@@ -7,8 +7,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.SneakyThrows;
 import pl.bratek20.properties.api.PropertiesSource;
-import pl.bratek20.properties.api.PropertiesSourceName;
-import pl.bratek20.properties.api.PropertyName;
+import pl.bratek20.properties.api.PropertiesSourceId;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,13 +33,13 @@ public class YamlPropertiesSource implements PropertiesSource {
     }
 
     @Override
-    public PropertiesSourceName getName() {
-        return new PropertiesSourceName("yaml");
+    public PropertiesSourceId getId() {
+        return new PropertiesSourceId("yaml");
     }
 
     @Override
-    public <T> T get(PropertyName name, Class<T> type) {
-        return parseYamlSection("application.yaml", name.value(), new TypeReference<T>() {
+    public <T> T get(String name, Class<T> type) {
+        return parseYamlSection("application.yaml", name, new TypeReference<T>() {
             @Override
             public Type getType() {
                 return type;
@@ -58,12 +57,12 @@ public class YamlPropertiesSource implements PropertiesSource {
     }
 
     @Override
-    public <T> List<T> getList(PropertyName name, Class<T> clazz) {
-        return parseYamlSection("application.yaml", name.value(), listTypeRef(clazz));
+    public <T> List<T> getList(String name, Class<T> clazz) {
+        return parseYamlSection("application.yaml", name, listTypeRef(clazz));
     }
 
     @Override
-    public <T> boolean hasOfType(PropertyName name, Class<T> type) {
+    public <T> boolean hasOfType(String name, Class<T> type) {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             // Load the YAML file
@@ -71,7 +70,7 @@ public class YamlPropertiesSource implements PropertiesSource {
             JsonNode rootNode = mapper.readTree(file);
 
             // Navigate to the specified YAML path
-            String[] pathElements = name.value().split("\\.");
+            String[] pathElements = name.split("\\.");
             JsonNode targetNode = rootNode;
             for (String element : pathElements) {
                 targetNode = targetNode.get(element);
