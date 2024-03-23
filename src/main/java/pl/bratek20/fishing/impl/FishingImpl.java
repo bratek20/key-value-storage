@@ -1,11 +1,11 @@
 package pl.bratek20.fishing.impl;
 
 import lombok.RequiredArgsConstructor;
+import pl.bratek20.architecture.properties.api.PropertiesApi;
 import pl.bratek20.fishing.api.FishId;
 import pl.bratek20.fishing.api.Fishery;
 import pl.bratek20.fishing.api.FisheryId;
 import pl.bratek20.fishing.api.FishingApi;
-import pl.bratek20.properties.api.PropertiesApi;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package pl.bratek20.fishing.api
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import pl.bratek20.architecture.properties.PropertiesApiMock
 import pl.bratek20.fishing.fixtures.fishery
-import pl.bratek20.properties.fixtures.PropertiesApiMock
 import pl.bratek20.tests.ContextTest
 
 abstract class FishingApiTest : ContextTest<FishingApiTest.Context>() {

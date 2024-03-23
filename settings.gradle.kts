@@ -3,7 +3,9 @@ rootProject.name = "key-value-storage"
 pluginManagement {
     repositories {
         gradlePluginPortal()
+
         mavenLocal()
+
         if (System.getenv("GITHUB_ACTOR") != null) {
             maven {
                 name = "GitHubPackages"
