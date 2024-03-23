@@ -1,20 +1,18 @@
 plugins {
-    id("pl.bratek20.base-conventions") version "1.0.0-SNAPSHOT"
+    alias(libs.plugins.bratek20.base.conventions)
 
-    kotlin("jvm") version "1.9.22"
-
-    id("com.google.protobuf") version "0.9.4"
+    alias(libs.plugins.protobuf)
 }
 
 dependencies {
-    implementation("pl.bratek20:bratek20-starter:1.0.0-SNAPSHOT")
-    testImplementation(testFixtures("pl.bratek20:bratek20-starter:1.0.0-SNAPSHOT"))
+    implementation(libs.bratek20.starter)
+    testImplementation(testFixtures(libs.bratek20.starter))
 
-    implementation("com.google.protobuf:protobuf-java:3.25.2")
+    implementation(libs.protobuf.java)
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.25.2"
+        artifact = libs.protobuf.protoc.get().toString()
     }
 }
