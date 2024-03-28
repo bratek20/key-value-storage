@@ -10,6 +10,7 @@ import pl.bratek20.spring.data.MySQLExtension
 import pl.bratek20.spring.data.dbcleaner.DBCleaner
 import pl.bratek20.spring.flyway.impl.FlywayConfig
 
+//TODO less code repetition with impl test
 @ExtendWith(MySQLExtension::class)
 internal class KeyValueStorageIntegrationTest : KeyValueStorageTest() {
     override fun createApi(): KeyValueStorage {
