@@ -1,21 +1,19 @@
 package pl.bratek20.keyvaluestorage.api
 
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import pl.bratek20.architecture.tests.ApiTest
 import pl.bratek20.keyvaluestorage.fixtures.Assert
 import pl.bratek20.keyvaluestorage.fixtures.Scenarios
 
-abstract class KeyValueStorageTest {
-    protected abstract fun createStorage(): KeyValueStorage
-
+abstract class KeyValueStorageTest : ApiTest<KeyValueStorage>() {
     private lateinit var storage: KeyValueStorage
     private lateinit var scenarios: Scenarios
 
-    @BeforeEach
-    fun beforeEach() {
-        storage = createStorage()
-        scenarios = Scenarios(storage)
+    override fun setup() {
+        super.setup()
+        storage = api
+        scenarios = Scenarios(api)
     }
 
     @Test
@@ -87,7 +85,7 @@ abstract class KeyValueStorageTest {
             value = "value"
         }
 
-        val newStorage = createStorage()
+        val newStorage = createApi()
 
         val result = newStorage.get(Key("key"))
 

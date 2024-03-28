@@ -1,36 +1,36 @@
 package pl.bratek20.keyvaluestorage.fixtures
 
-import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import pl.bratek20.keyvaluestorage.api.Key
 import pl.bratek20.keyvaluestorage.api.KeyValuePair
 import pl.bratek20.keyvaluestorage.api.Value
 
 object Assert {
     fun value(given: Value, expected: String) {
-        Assertions.assertEquals(given.value, expected)
+        assertThat(given.value).isEqualTo(expected)
     }
 
     private fun keyValuePair(given: KeyValuePair, expectedConfigure: ExpectedKeyValuePair.() -> Unit) {
         val expected = ExpectedKeyValuePair().apply(expectedConfigure)
         if (expected.key != null) {
-            Assertions.assertEquals(given.key.value, expected.key)
+            assertThat(given.key.value).isEqualTo(expected.key)
         }
         if (expected.value != null) {
-            Assertions.assertEquals(given.value.value, expected.value)
+            assertThat(given.value.value).isEqualTo(expected.value)
         }
     }
 
-    fun keyValuePairList(given: List<KeyValuePair>, expectedConfigure: List<ExpectedKeyValuePair.() -> Unit>) {
-        Assertions.assertEquals(given.size, expectedConfigure.size)
+    fun keyValuePairList(given: List<KeyValuePair>, expected: List<ExpectedKeyValuePair.() -> Unit>) {
+        assertThat(given).hasSize(expected.size)
         given.forEachIndexed { index, keyValuePair ->
-            keyValuePair(keyValuePair, expectedConfigure[index])
+            keyValuePair(keyValuePair, expected[index])
         }
     }
 
     fun keyList(given: List<Key>, expected: List<String>) {
-        Assertions.assertEquals(given.size, expected.size)
+        assertThat(given).hasSize(expected.size)
         given.forEachIndexed { index, key ->
-            Assertions.assertEquals(key.value, expected[index])
+            assertThat(key.value).isEqualTo(expected[index])
         }
     }
 
