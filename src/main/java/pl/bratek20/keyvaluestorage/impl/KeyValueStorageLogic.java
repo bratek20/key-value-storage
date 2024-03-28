@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class KeyValueStorageImpl implements KeyValueStorage {
+public class KeyValueStorageLogic implements KeyValueStorage {
     private final List<KeyValuePair> storage = new ArrayList<>();
 
     @Override

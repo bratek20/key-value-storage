@@ -4,23 +4,23 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import pl.bratek20.keyvaluestorage.fixtures.Assert
-import pl.bratek20.keyvaluestorage.fixtures.Setup
+import pl.bratek20.keyvaluestorage.fixtures.Scenarios
 
 abstract class KeyValueStorageTest {
     protected abstract fun createStorage(): KeyValueStorage
 
     private lateinit var storage: KeyValueStorage
-    private lateinit var setup: Setup
+    private lateinit var scenarios: Scenarios
 
     @BeforeEach
     fun beforeEach() {
         storage = createStorage()
-        setup = Setup(storage)
+        scenarios = Scenarios(storage)
     }
 
     @Test
     fun shouldSetAndGetValue() {
-        setup.set {
+        scenarios.set {
             key = "key"
             value = "value"
         }
@@ -32,7 +32,7 @@ abstract class KeyValueStorageTest {
 
     @Test
     fun shouldGetAll() {
-        setup.setMany(listOf(
+        scenarios.setMany(listOf(
             { key = "key1"; value = "value1" },
             { key = "key2"; value = "value2" }
         ))
@@ -47,7 +47,7 @@ abstract class KeyValueStorageTest {
 
     @Test
     fun shouldGetAllKeys() {
-        setup.setMany(listOf(
+        scenarios.setMany(listOf(
             { key = "key1" },
             { key = "key2" }
         ))
@@ -62,7 +62,7 @@ abstract class KeyValueStorageTest {
 
     @Test
     fun keyValuePairsShouldBeSortedByValuesForGetAll() {
-        setup.setMany(listOf(
+        scenarios.setMany(listOf(
             { key = "key1"; value = "2" },
             { key = "key2"; value = "1" }
         ))
@@ -78,5 +78,19 @@ abstract class KeyValueStorageTest {
     @Test
     fun shouldThrowIfKeyNotFound() {
         assertThrows<KeyNotFoundException> {  storage.get(Key("key"))}
+    }
+
+    @Test
+    fun shouldBePersistent() {
+        scenarios.set {
+            key = "key"
+            value = "value"
+        }
+
+        val newStorage = createStorage()
+
+        val result = newStorage.get(Key("key"))
+
+        Assert.value(result, "value")
     }
 }
