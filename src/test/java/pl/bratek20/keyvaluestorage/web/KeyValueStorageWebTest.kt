@@ -4,6 +4,7 @@ import pl.bratek20.commons.http.impl.HttpConfig
 import pl.bratek20.keyvaluestorage.api.KeyValueStorage
 import pl.bratek20.keyvaluestorage.api.KeyValueStorageTest
 import pl.bratek20.keyvaluestorage.impl.infra.KeyValueStorageConfig
+import pl.bratek20.keyvaluestorage.web.client.KeyValueStorageHttpClient
 import pl.bratek20.keyvaluestorage.web.client.KeyValueStorageWebClientConfig
 import pl.bratek20.keyvaluestorage.web.server.KeyValueStorageWebServerConfig
 import pl.bratek20.spring.context.SpringContextBuilder
@@ -14,19 +15,23 @@ import pl.bratek20.spring.web.TestWebAppRunner
 
 internal class KeyValueStorageWebTest : KeyValueStorageTest() {
     override fun createApi(): KeyValueStorage {
-        TestWebAppRunner(
+        val port = TestWebAppRunner(
             FlywayConfig::class.java,
             InMemoryDataConfig::class.java,
             KeyValueStorageConfig::class.java,
             KeyValueStorageWebServerConfig::class.java
         ).run()
 
-        return SpringContextBuilder(
+        val client = SpringContextBuilder(
                 HttpConfig::class.java,
                 KeyValueStorageWebClientConfig::class.java
             )
             .build()
-            .get(KeyValueStorage::class.java)
+            .get(KeyValueStorageHttpClient::class.java)
+
+        client.setPort(port)
+
+        return client
     }
 
     override fun clean() {

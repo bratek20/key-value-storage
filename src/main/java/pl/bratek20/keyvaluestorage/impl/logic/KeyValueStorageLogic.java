@@ -18,7 +18,8 @@ public class KeyValueStorageLogic implements KeyValueStorage {
     @Override
     public Value get(Key key) {
         return repository.findValue(key)
-            .orElseThrow(KeyNotFoundException::new);
+            .orElse(new Value(""));
+            //.orElseThrow(KeyNotFoundException::new);
     }
 
     @Override

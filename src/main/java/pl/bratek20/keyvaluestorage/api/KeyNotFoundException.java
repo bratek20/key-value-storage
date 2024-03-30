@@ -1,4 +1,6 @@
 package pl.bratek20.keyvaluestorage.api;
 
-public class KeyNotFoundException extends RuntimeException {
+import pl.bratek20.architecture.exceptions.ApiException;
+
+public class KeyNotFoundException extends ApiException {
 }
